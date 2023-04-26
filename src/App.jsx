@@ -10,7 +10,7 @@ class Scheduling extends React.Component {
   };
 
   render() {
-    const events = JSON.parse(this.props.events);
+    const events = ["Road Block 1", "Road Block 2", "Road Block 3"]; //JSON.parse(this.props.events);
     return (
       <div>
         <h2>Scheduled Events:</h2>
