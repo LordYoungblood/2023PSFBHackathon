@@ -2,7 +2,7 @@
   "name": "ui",
   "private": true,
   "version": "0.0.0",
-  "homepage": "/r2wc-checklist/",
+  "homepage": "/",
   "type": "module",
   "scripts": {
     "start": "vite",
