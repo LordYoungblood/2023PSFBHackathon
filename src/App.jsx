@@ -15,7 +15,7 @@ class Scheduling extends React.Component {
     return (
       <div>
         <h2>Scheduled Events:</h2>
-        <RoadBlockSelector proxy="{this.props.proxy}" />
+        <RoadBlockSelector proxy={this.props.proxy} />
       </div>
     );
   }

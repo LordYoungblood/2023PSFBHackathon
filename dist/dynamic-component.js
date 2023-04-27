@@ -6330,7 +6330,7 @@ class pc extends os.Component {
   render() {
     return /* @__PURE__ */ wn.jsxs("div", { children: [
       /* @__PURE__ */ wn.jsx("h2", { children: "Scheduled Events:" }),
-      /* @__PURE__ */ wn.jsx(mc, { proxy: "{this.props.proxy}" })
+      /* @__PURE__ */ wn.jsx(mc, { proxy: this.props.proxy })
     ] });
   }
 }
