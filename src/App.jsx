@@ -110,13 +110,15 @@ function RoadBlockSelector(props) {
                   >
                     <td>{roadBlock.road}</td>
                     <td>
-                      <input
-                        className="road-block-checkbox"
-                        type="checkbox"
-                        checked={roadBlock.inUse}
-                        onChange={() => toggleInUse(index)}
-                        id={`roadBlock-${index}`}
-                      />
+                      <div className="form-check form-switch">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id={`roadBlock-${index}`}
+                          checked={roadBlock.inUse}
+                          onChange={() => toggleInUse(index)}
+                        />
+                      </div>
                     </td>
                   </tr>
                 ))}
