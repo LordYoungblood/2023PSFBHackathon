@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import PropTypes from "prop-types";
 import reactToWebComponent from "react-to-webcomponent";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
 
 class Scheduling extends React.Component {
@@ -13,7 +15,7 @@ class Scheduling extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <h2>Scheduled Events:</h2>
+        <h2>Road Blocks</h2>
         <RoadBlockSelector proxy={this.props.proxy} />
       </div>
     );
@@ -22,6 +24,7 @@ class Scheduling extends React.Component {
 
 function RoadBlockSelector(props) {
   const [roadBlocks, setRoadBlocks] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     fetchRoadBlocks().then((data) => setRoadBlocks(data));
@@ -81,35 +84,47 @@ function RoadBlockSelector(props) {
     setRoadBlocks(updatedRoadBlocks);
   }
 
+  function handleCheckboxChange(event) {
+    setShowDropdown(event.target.checked);
+  }
+
   return (
-    <div className="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Road</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {roadBlocks.map((roadBlock, index) => (
-            <tr
-              key={index}
-              className={roadBlock.inUse ? "checked-row" : "unchecked-row"}
-            >
-              <td>{roadBlock.road}</td>
-              <td>
-                <input
-                  className="road-block-checkbox"
-                  type="checkbox"
-                  checked={roadBlock.inUse}
-                  onChange={() => toggleInUse(index)}
-                  id={`roadBlock-${index}`}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <div className="table-responsive">
+            <table className="table table-bordered table-hover text-white">
+              <thead>
+                <tr>
+                  <th>Road</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {roadBlocks.map((roadBlock, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      roadBlock.inUse ? "table-danger" : "table-success"
+                    }
+                  >
+                    <td>{roadBlock.road}</td>
+                    <td>
+                      <input
+                        className="road-block-checkbox"
+                        type="checkbox"
+                        checked={roadBlock.inUse}
+                        onChange={() => toggleInUse(index)}
+                        id={`roadBlock-${index}`}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
