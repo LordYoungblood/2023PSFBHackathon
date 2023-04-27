@@ -6347,10 +6347,12 @@ function mc(e) {
     return await (await fetch(`${e.proxy}/road/status`)).json();
   }
   function l(o) {
-    const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : (fetch(`${e.proxy}/road/status`, {
-      method: "POST",
-      body: u[0]
-    }), i));
+    const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
+    for (const i of u)
+      fetch(`${e.proxy}/road/status`, {
+        method: "POST",
+        body: u[0]
+      });
     t(u);
   }
   return /* @__PURE__ */ wn.jsx("div", { children: n.map((o, u) => /* @__PURE__ */ wn.jsx("div", { children: /* @__PURE__ */ wn.jsxs(

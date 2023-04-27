@@ -39,12 +39,14 @@ function RoadBlockSelector(props) {
       if (i === index) {
         return { ...roadBlock, inUse: !roadBlock.inUse };
       }
+      return roadBlock;
+    });
+    for (const update of updatedRoadBlocks) {
       fetch(`${props.proxy}/road/status`, {
         method: "POST",
         body: updatedRoadBlocks[0],
       });
-      return roadBlock;
-    });
+    }
     setRoadBlocks(updatedRoadBlocks);
   }
 
