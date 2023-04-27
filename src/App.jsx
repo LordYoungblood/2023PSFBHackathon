@@ -11,8 +11,23 @@ class Scheduling extends React.Component {
 
   render() {
     const roadBlocks = [
-      { name: "Road Block 1", inUse: false },
-      { name: "Road Block 2", inUse: true },
+      {
+        name: `Nasa Pkwy E
+      Banana River Dr NE
+      Cape RD
+      Samuel C Philips Pkwy
+      Lighthouse Rd
+      Pier Rd
+      A1A`,
+        inUse: false,
+      },
+      {
+        name: `Samuel C Philips Pkwy
+      Lighthouse Rd
+      Pier Rd
+      A1A`,
+        inUse: true,
+      },
     ];
 
     return (
@@ -24,47 +39,40 @@ class Scheduling extends React.Component {
   }
 }
 
-function RoadBlockSelector({ roadBlocks }) {
-  const [selectedRoadBlock, setSelectedRoadBlock] = useState(roadBlocks[0]);
+function RoadBlockSelector({ roadBlocks: initialRoadBlocks }) {
+  const [roadBlocks, setRoadBlocks] = useState(initialRoadBlocks);
 
-  function toggleInUse() {
-    const updatedRoadBlock = {
-      ...selectedRoadBlock,
-      inUse: !selectedRoadBlock.inUse,
-    };
-    const index = roadBlocks.findIndex(
-      (roadBlock) => roadBlock.name === selectedRoadBlock.name
-    );
-    roadBlocks[index] = updatedRoadBlock;
-    setSelectedRoadBlock(updatedRoadBlock);
+  function toggleInUse(index) {
+    const updatedRoadBlocks = roadBlocks.map((roadBlock, i) => {
+      if (i === index) {
+        return { ...roadBlock, inUse: !roadBlock.inUse };
+      }
+      return roadBlock;
+    });
+    setRoadBlocks(updatedRoadBlocks);
   }
 
   return (
-    <>
-      <select
-        value={selectedRoadBlock.name}
-        onChange={(e) =>
-          setSelectedRoadBlock(
-            roadBlocks.find((roadBlock) => roadBlock.name === e.target.value)
-          )
-        }
-      >
-        {roadBlocks.map((roadBlock, index) => (
-          <option
-            key={index}
-            value={roadBlock.name}
+    <div>
+      {roadBlocks.map((roadBlock, index) => (
+        <div key={index}>
+          <label
             style={{
-              backgroundColor: roadBlock.inUse ? "green" : "red",
+              backgroundColor: roadBlock.inUse ? "red" : "green",
+              padding: "5px",
+              display: "inline-block",
             }}
           >
+            <input
+              type="checkbox"
+              checked={roadBlock.inUse}
+              onChange={() => toggleInUse(index)}
+            />
             {roadBlock.name}
-          </option>
-        ))}
-      </select>
-      <button onClick={toggleInUse}>
-        {selectedRoadBlock.inUse ? "Mark not in use" : "Mark in use"}
-      </button>
-    </>
+          </label>
+        </div>
+      ))}
+    </div>
   );
 }
 
