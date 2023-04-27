@@ -29,7 +29,7 @@ function RoadBlockSelector(props) {
   }, []);
 
   async function fetchRoadBlocks() {
-    const response = await fetch(`/${props.proxy}/road/status`);
+    const response = await fetch(`${props.proxy}/road/status`);
     const data = await response.json();
     return data;
   }
@@ -39,7 +39,7 @@ function RoadBlockSelector(props) {
       if (i === index) {
         return { ...roadBlock, inUse: !roadBlock.inUse };
       }
-      fetch(`/${props.proxy}/road/status`, {
+      fetch(`${props.proxy}/road/status`, {
         method: "POST",
         body: updatedRoadBlocks[0],
       });

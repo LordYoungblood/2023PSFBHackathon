@@ -6344,10 +6344,10 @@ function mc(e) {
     r().then((o) => t(o));
   }, []);
   async function r() {
-    return await (await fetch(`/${e.proxy}/road/status`)).json();
+    return await (await fetch(`${e.proxy}/road/status`)).json();
   }
   function l(o) {
-    const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : (fetch(`/${e.proxy}/road/status`, {
+    const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : (fetch(`${e.proxy}/road/status`, {
       method: "POST",
       body: u[0]
     }), i));
