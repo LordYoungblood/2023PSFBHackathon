@@ -9,11 +9,10 @@ class Scheduling extends React.Component {
     events: PropTypes.string,
     proxy: PropTypes.string,
   };
-  render() {
-    const roadNames = [];
 
+  render() {
     return (
-      <div>
+      <div className="wrapper">
         <h2>Scheduled Events:</h2>
         <RoadBlockSelector proxy={this.props.proxy} />
       </div>
@@ -29,9 +28,40 @@ function RoadBlockSelector(props) {
   }, []);
 
   async function fetchRoadBlocks() {
-    const response = await fetch(`${props.proxy}/road/status`);
-    const data = await response.json();
-    return data;
+    // const response = await fetch(`${props.proxy}/road/status`);
+    // const data = await response.json();
+    // return data;
+    const roadNames = [
+      {
+        road: "Nasa_Pkwy_E_Plane.002",
+        inUse: false,
+      },
+      {
+        road: "Banana_River_Dr_NE_Plane.011",
+        inUse: false,
+      },
+      {
+        road: "Cape_Rd_Plane.009",
+        inUse: false,
+      },
+      {
+        road: "Samuel_C_Philips_Pkwy_Mesh",
+        inUse: false,
+      },
+      {
+        road: "Lighthouse_Rd_Plane.005",
+        inUse: false,
+      },
+      {
+        road: "Pier_Rd_Plane.001",
+        inUse: false,
+      },
+      {
+        road: "A1A_Plane.004",
+        inUse: false,
+      },
+    ];
+    return roadNames;
   }
 
   function toggleInUse(index) {
@@ -41,35 +71,45 @@ function RoadBlockSelector(props) {
       }
       return roadBlock;
     });
-    for (const update of updatedRoadBlocks) {
-      fetch(`${props.proxy}/road/status`, {
-        method: "POST",
-        body: updatedRoadBlocks[0],
-      });
-    }
+    // Uncomment the following lines when connecting to the API.
+    // for (const update of updatedRoadBlocks) {
+    //   fetch(`${props.proxy}/road/status`, {
+    //     method: "POST",
+    //     body: updatedRoadBlocks[0],
+    //   });
+    // }
     setRoadBlocks(updatedRoadBlocks);
   }
 
   return (
-    <div>
-      {roadBlocks.map((roadBlock, index) => (
-        <div key={index}>
-          <label
-            style={{
-              backgroundColor: roadBlock.inUse ? "red" : "green",
-              padding: "5px",
-              display: "inline-block",
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={roadBlock.inUse}
-              onChange={() => toggleInUse(index)}
-            />
-            {roadBlock.name}
-          </label>
-        </div>
-      ))}
+    <div className="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Road</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {roadBlocks.map((roadBlock, index) => (
+            <tr
+              key={index}
+              className={roadBlock.inUse ? "checked-row" : "unchecked-row"}
+            >
+              <td>{roadBlock.road}</td>
+              <td>
+                <input
+                  className="road-block-checkbox"
+                  type="checkbox"
+                  checked={roadBlock.inUse}
+                  onChange={() => toggleInUse(index)}
+                  id={`roadBlock-${index}`}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -77,7 +117,7 @@ function RoadBlockSelector(props) {
 RoadBlockSelector.propTypes = {
   roadBlocks: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      road: PropTypes.string.isRequired,
       inUse: PropTypes.bool.isRequired,
     })
   ).isRequired,
