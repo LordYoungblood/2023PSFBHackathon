@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import PropTypes from "prop-types";
 import reactToWebComponent from "react-to-webcomponent";
@@ -7,46 +7,42 @@ import "./App.css";
 class Scheduling extends React.Component {
   static propTypes = {
     events: PropTypes.string,
+    proxy: PropTypes.string,
   };
-
   render() {
-    const roadBlocks = [
-      {
-        name: `Nasa Pkwy E
-      Banana River Dr NE
-      Cape RD
-      Samuel C Philips Pkwy
-      Lighthouse Rd
-      Pier Rd
-      A1A`,
-        inUse: false,
-      },
-      {
-        name: `Samuel C Philips Pkwy
-      Lighthouse Rd
-      Pier Rd
-      A1A`,
-        inUse: true,
-      },
-    ];
+    const roadNames = [];
 
     return (
       <div>
         <h2>Scheduled Events:</h2>
-        <RoadBlockSelector roadBlocks={roadBlocks} />
+        <RoadBlockSelector proxy="{this.props.proxy}" />
       </div>
     );
   }
 }
 
-function RoadBlockSelector({ roadBlocks: initialRoadBlocks }) {
-  const [roadBlocks, setRoadBlocks] = useState(initialRoadBlocks);
+function RoadBlockSelector(props) {
+  const [roadBlocks, setRoadBlocks] = useState([]);
+
+  useEffect(() => {
+    fetchRoadBlocks().then((data) => setRoadBlocks(data));
+  }, []);
+
+  async function fetchRoadBlocks() {
+    const response = await fetch(`/${props.proxy}/road/status`);
+    const data = await response.json();
+    return data;
+  }
 
   function toggleInUse(index) {
     const updatedRoadBlocks = roadBlocks.map((roadBlock, i) => {
       if (i === index) {
         return { ...roadBlock, inUse: !roadBlock.inUse };
       }
+      fetch(`/${props.proxy}/road/status`, {
+        method: "POST",
+        body: updatedRoadBlocks[0],
+      });
       return roadBlock;
     });
     setRoadBlocks(updatedRoadBlocks);
