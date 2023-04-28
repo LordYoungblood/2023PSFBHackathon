@@ -6349,7 +6349,7 @@ function mc(e) {
   function l(o) {
     const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
     t(u);
-    for (const i of n)
+    for (const i of u)
       fetch(`${e.proxy}/road/status`, {
         method: "POST",
         headers: {
