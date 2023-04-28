@@ -71,13 +71,12 @@ function RoadBlockSelector(props) {
       }
       return roadBlock;
     });
-    // Uncomment the following lines when connecting to the API.
-    // for (const update of updatedRoadBlocks) {
-    //   fetch(`${props.proxy}/road/status`, {
-    //     method: "POST",
-    //     body: updatedRoadBlocks[0],
-    //   });
-    // }
+    for (const update of updatedRoadBlocks) {
+      fetch(`${props.proxy}/road/status`, {
+        method: "POST",
+        body: updatedRoadBlocks[0],
+      });
+    }
     setRoadBlocks(updatedRoadBlocks);
   }
 
