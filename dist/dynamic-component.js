@@ -6398,7 +6398,7 @@ function mc(r) {
           l
         )) })
       ] }) }) }),
-      /* @__PURE__ */ U.jsx("button", { type: "submit", onClick: a, children: "Apply Changes" })
+      /* @__PURE__ */ U.jsx("button", { type: "button", class: "btn btn-success", onClick: a, children: "Apply Changes" })
     ] }) })
   ] });
 }

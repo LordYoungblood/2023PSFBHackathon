@@ -105,7 +105,7 @@ function RoadBlockSelector(props) {
               </table>
             </div>
           </div>
-          <button type="submit" onClick={refreshPage}>
+          <button type="button" class="btn btn-success" onClick={refreshPage}>
             Apply Changes
           </button>
         </div>
