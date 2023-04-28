@@ -6348,6 +6348,11 @@ function mc(e) {
   }
   function l(o) {
     const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
+    for (const i of u)
+      fetch(`${e.proxy}/road/status`, {
+        method: "POST",
+        body: u[0]
+      });
     t(u);
   }
   return /* @__PURE__ */ se.jsx("div", { className: "table-wrapper", children: /* @__PURE__ */ se.jsxs("table", { children: [
