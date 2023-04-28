@@ -28,40 +28,40 @@ function RoadBlockSelector(props) {
   }, []);
 
   async function fetchRoadBlocks() {
-    // const response = await fetch(`${props.proxy}/road/status`);
-    // const data = await response.json();
-    // return data;
-    const roadNames = [
-      {
-        road: "Nasa_Pkwy_E_Plane.002",
-        inUse: false,
-      },
-      {
-        road: "Banana_River_Dr_NE_Plane.011",
-        inUse: false,
-      },
-      {
-        road: "Cape_Rd_Plane.009",
-        inUse: false,
-      },
-      {
-        road: "Samuel_C_Philips_Pkwy_Mesh",
-        inUse: false,
-      },
-      {
-        road: "Lighthouse_Rd_Plane.005",
-        inUse: false,
-      },
-      {
-        road: "Pier_Rd_Plane.001",
-        inUse: false,
-      },
-      {
-        road: "A1A_Plane.004",
-        inUse: false,
-      },
-    ];
-    return roadNames;
+    const response = await fetch(`${props.proxy}/road/status`);
+    const data = await response.json();
+    return data;
+    //   const roadNames = [
+    //     {
+    //       road: "Nasa_Pkwy_E_Plane.002",
+    //       inUse: false,
+    //     },
+    //     {
+    //       road: "Banana_River_Dr_NE_Plane.011",
+    //       inUse: false,
+    //     },
+    //     {
+    //       road: "Cape_Rd_Plane.009",
+    //       inUse: false,
+    //     },
+    //     {
+    //       road: "Samuel_C_Philips_Pkwy_Mesh",
+    //       inUse: false,
+    //     },
+    //     {
+    //       road: "Lighthouse_Rd_Plane.005",
+    //       inUse: false,
+    //     },
+    //     {
+    //       road: "Pier_Rd_Plane.001",
+    //       inUse: false,
+    //     },
+    //     {
+    //       road: "A1A_Plane.004",
+    //       inUse: false,
+    //     },
+    //   ];
+    //   return roadNames;
   }
 
   function toggleInUse(index) {
