@@ -6349,15 +6349,15 @@ function mc(e) {
   function l(o) {
     const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
     t(u);
+    for (const i of n)
+      fetch(`${e.proxy}/road/status`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ road: i.road, inUse: i.inUse })
+      });
   }
-  for (const o of n)
-    fetch(`${e.proxy}/road/status`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ road: o.road, inUse: o.inUse })
-    });
   return /* @__PURE__ */ se.jsx("div", { className: "table-wrapper", children: /* @__PURE__ */ se.jsxs("table", { children: [
     /* @__PURE__ */ se.jsx("thead", { children: /* @__PURE__ */ se.jsxs("tr", { children: [
       /* @__PURE__ */ se.jsx("th", { children: "Road" }),
