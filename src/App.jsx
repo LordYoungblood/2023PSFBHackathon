@@ -83,6 +83,9 @@ function RoadBlockSelector(props) {
       });
     }
   }
+  function refreshPage() {
+    window.location.reload();
+  }
 
   return (
     <div className="table-wrapper">
@@ -113,7 +116,9 @@ function RoadBlockSelector(props) {
           ))}
         </tbody>
       </table>
-      <button onClick="() => window.location.reload();">Refresh Page</button>
+      <button type="submit" onClick="refreshPage()">
+        Refresh Button
+      </button>
     </div>
   );
 }

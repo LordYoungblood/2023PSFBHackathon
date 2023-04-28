@@ -6385,7 +6385,7 @@ function mc(e) {
         u
       )) })
     ] }),
-    /* @__PURE__ */ le.jsx("button", { onClick: "() => window.location.reload();", children: "Refresh Page" })
+    /* @__PURE__ */ le.jsx("button", { type: "submit", onClick: "refreshPage()", children: "Refresh Button" })
   ] });
 }
 mc.propTypes = {
