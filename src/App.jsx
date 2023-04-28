@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import reactToWebComponent from "react-to-webcomponent";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -31,40 +31,9 @@ function RoadBlockSelector(props) {
   }, []);
 
   async function fetchRoadBlocks() {
-    // const response = await fetch(`${props.proxy}/road/status`);
-    // const data = await response.json();
-    // return data;
-    const roadNames = [
-      {
-        road: "Nasa_Pkwy_E_Plane.002",
-        inUse: false,
-      },
-      {
-        road: "Banana_River_Dr_NE_Plane.011",
-        inUse: false,
-      },
-      {
-        road: "Cape_Rd_Plane.009",
-        inUse: false,
-      },
-      {
-        road: "Samuel_C_Philips_Pkwy_Mesh",
-        inUse: false,
-      },
-      {
-        road: "Lighthouse_Rd_Plane.005",
-        inUse: false,
-      },
-      {
-        road: "Pier_Rd_Plane.001",
-        inUse: false,
-      },
-      {
-        road: "A1A_Plane.004",
-        inUse: false,
-      },
-    ];
-    return roadNames;
+    const response = await fetch(`${props.proxy}/road/status`);
+    const data = await response.json();
+    return data;
   }
 
   function toggleInUse(index) {
@@ -74,14 +43,21 @@ function RoadBlockSelector(props) {
       }
       return roadBlock;
     });
-    // Uncomment the following lines when connecting to the API.
-    // for (const update of updatedRoadBlocks) {
-    //   fetch(`${props.proxy}/road/status`, {
-    //     method: "POST",
-    //     body: updatedRoadBlocks[0],
-    //   });
-    // }
     setRoadBlocks(updatedRoadBlocks);
+
+    for (const roadBlock of updatedRoadBlocks) {
+      fetch(`${props.proxy}/road/status`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ road: roadBlock.road, inUse: roadBlock.inUse }),
+      });
+    }
+  }
+
+  function refreshPage() {
+    window.location.reload();
   }
 
   function handleCheckboxChange(event) {
@@ -126,6 +102,9 @@ function RoadBlockSelector(props) {
             </table>
           </div>
         </div>
+        <button type="submit" onClick={refreshPage}>
+          Apply Changes
+        </button>
       </div>
     </div>
   );
