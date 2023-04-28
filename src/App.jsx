@@ -113,7 +113,7 @@ function RoadBlockSelector(props) {
           ))}
         </tbody>
       </table>
-      <button onClick="window.location.reload();">Refresh Page</button>
+      <button onClick="() => window.location.reload();">Refresh Page</button>
     </div>
   );
 }
