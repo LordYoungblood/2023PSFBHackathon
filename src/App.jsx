@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import reactToWebComponent from "react-to-webcomponent";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css?inline";
+import "./App.css?inline";
 
 class Scheduling extends React.Component {
   static propTypes = {
