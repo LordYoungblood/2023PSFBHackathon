@@ -6341,22 +6341,25 @@ Fu(pc, "propTypes", {
 function mc(e) {
   const [n, t] = Rt.useState([]);
   Rt.useEffect(() => {
-    r().then((o) => t(o));
+    r().then((u) => t(u));
   }, []);
   async function r() {
     return await (await fetch(`${e.proxy}/road/status`)).json();
   }
-  function l(o) {
-    const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
-    t(u);
-    for (const i of u)
+  function l(u) {
+    const i = n.map((s, c) => c === u ? { ...s, inUse: !s.inUse } : s);
+    t(i);
+    for (const s of i)
       fetch(`${e.proxy}/road/status`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ road: i.road, inUse: i.inUse })
+        body: JSON.stringify({ road: s.road, inUse: s.inUse })
       });
+  }
+  function o() {
+    window.location.reload();
   }
   return /* @__PURE__ */ le.jsxs("div", { className: "table-wrapper", children: [
     /* @__PURE__ */ le.jsxs("table", { children: [
@@ -6364,28 +6367,28 @@ function mc(e) {
         /* @__PURE__ */ le.jsx("th", { children: "Road" }),
         /* @__PURE__ */ le.jsx("th", { children: "Status" })
       ] }) }),
-      /* @__PURE__ */ le.jsx("tbody", { children: n.map((o, u) => /* @__PURE__ */ le.jsxs(
+      /* @__PURE__ */ le.jsx("tbody", { children: n.map((u, i) => /* @__PURE__ */ le.jsxs(
         "tr",
         {
-          className: o.inUse ? "checked-row" : "unchecked-row",
+          className: u.inUse ? "checked-row" : "unchecked-row",
           children: [
-            /* @__PURE__ */ le.jsx("td", { children: o.road }),
+            /* @__PURE__ */ le.jsx("td", { children: u.road }),
             /* @__PURE__ */ le.jsx("td", { children: /* @__PURE__ */ le.jsx(
               "input",
               {
                 className: "road-block-checkbox",
                 type: "checkbox",
-                checked: o.inUse,
-                onChange: () => l(u),
-                id: `roadBlock-${u}`
+                checked: u.inUse,
+                onChange: () => l(i),
+                id: `roadBlock-${i}`
               }
             ) })
           ]
         },
-        u
+        i
       )) })
     ] }),
-    /* @__PURE__ */ le.jsx("button", { type: "submit", onClick: "refreshPage()", children: "Refresh Button" })
+    /* @__PURE__ */ le.jsx("button", { type: "submit", onClick: o, children: "Refresh Button" })
   ] });
 }
 mc.propTypes = {
