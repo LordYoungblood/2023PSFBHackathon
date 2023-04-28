@@ -13,7 +13,7 @@ class Scheduling extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <h2>Road Blocks:</h2>
+        <h2>Scheduled Events:</h2>
         <RoadBlockSelector proxy={this.props.proxy} />
       </div>
     );
@@ -73,14 +73,10 @@ function RoadBlockSelector(props) {
     });
 
     for (const roadBlock of roadBlocks) {
-      fetch(
-        `${props.proxy}/road/status?road=${encodeURI(roadBlock.road)}&inUse=${
-          roadBlock.inUse
-        }`,
-        {
-          method: "GET",
-        }
-      );
+      fetch(`${props.proxy}/road/status`, {
+        method: "POST",
+        body: { ...roadBlock, inUse: !roadBlock.inUse },
+      });
     }
     setRoadBlocks(updatedRoadBlocks);
   }
