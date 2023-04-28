@@ -6347,9 +6347,9 @@ function mc(e) {
     return await (await fetch(`${e.proxy}/road/status`)).json();
   }
   function l(o) {
-    n.map((u, i) => i === o ? { ...u, inUse: !u.inUse } : u);
+    const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
+    t(u);
   }
-  t(updatedRoadBlocks);
   for (const o of n)
     fetch(`${e.proxy}/road/status`, {
       method: "POST",

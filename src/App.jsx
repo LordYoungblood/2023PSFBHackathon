@@ -71,8 +71,8 @@ function RoadBlockSelector(props) {
       }
       return roadBlock;
     });
+    setRoadBlocks(updatedRoadBlocks);
   }
-  setRoadBlocks(updatedRoadBlocks);
 
   for (const roadBlock of roadBlocks) {
     fetch(`${props.proxy}/road/status`, {
