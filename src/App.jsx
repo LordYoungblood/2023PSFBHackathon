@@ -75,6 +75,9 @@ function RoadBlockSelector(props) {
     for (const roadBlock of roadBlocks) {
       fetch(`${props.proxy}/road/status`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ road: roadBlock.road, inUse: !roadBlock.inUse }),
       });
     }
