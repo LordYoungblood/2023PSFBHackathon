@@ -6348,7 +6348,7 @@ function mc(e) {
   }
   function l(o) {
     const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
-    console.log(`Updated Road Blocks (${u.length})`);
+    console.log(`Updated Road Blocks (${o})`);
     for (const i of u)
       fetch(`${e.proxy}/road/status`, {
         method: "POST",
