@@ -6348,11 +6348,10 @@ function mc(e) {
   }
   function l(o) {
     const u = n.map((i, s) => s === o ? { ...i, inUse: !i.inUse } : i);
-    console.log(`Updated Road Blocks (${o})`);
-    for (const i of u)
+    for (const i of n)
       fetch(`${e.proxy}/road/status`, {
         method: "POST",
-        body: u[0]
+        body: { ...i, inUse: !i.inUse }
       });
     t(u);
   }

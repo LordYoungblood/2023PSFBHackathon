@@ -72,11 +72,10 @@ function RoadBlockSelector(props) {
       return roadBlock;
     });
 
-    console.log(`Updated Road Blocks (${index})`);
-    for (const update of updatedRoadBlocks) {
+    for (const roadBlock of roadBlocks) {
       fetch(`${props.proxy}/road/status`, {
         method: "POST",
-        body: updatedRoadBlocks[0],
+        body: { ...roadBlock, inUse: !roadBlock.inUse },
       });
     }
     setRoadBlocks(updatedRoadBlocks);
