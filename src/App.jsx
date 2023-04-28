@@ -71,17 +71,17 @@ function RoadBlockSelector(props) {
       }
       return roadBlock;
     });
+  }
+  setRoadBlocks(updatedRoadBlocks);
 
-    for (const roadBlock of roadBlocks) {
-      fetch(`${props.proxy}/road/status`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ road: roadBlock.road, inUse: !roadBlock.inUse }),
-      });
-    }
-    setRoadBlocks(updatedRoadBlocks);
+  for (const roadBlock of roadBlocks) {
+    fetch(`${props.proxy}/road/status`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ road: roadBlock.road, inUse: roadBlock.inUse }),
+    });
   }
 
   return (
