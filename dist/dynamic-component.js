@@ -6351,7 +6351,7 @@ function mc(e) {
     for (const i of n)
       fetch(`${e.proxy}/road/status`, {
         method: "POST",
-        body: { ...i, inUse: !i.inUse }
+        body: JSON.stringify({ road: i.road, inUse: !i.inUse })
       });
     t(u);
   }
