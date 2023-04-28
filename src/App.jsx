@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import reactToWebComponent from "react-to-webcomponent";
 
-import "bootstrap/dist/css/bootstrap.min.css?inline";
-import "./App.css?inline";
+import bootstrapStyle from "bootstrap/dist/css/bootstrap.min.css?inline";
+import appStyle from "./App.css?inline";
 
 class Scheduling extends React.Component {
   static propTypes = {
@@ -65,46 +65,50 @@ function RoadBlockSelector(props) {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover text-white">
-              <thead>
-                <tr>
-                  <th>Road</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {roadBlocks.map((roadBlock, index) => (
-                  <tr
-                    key={index}
-                    className={
-                      roadBlock.inUse ? "table-danger" : "table-success"
-                    }
-                  >
-                    <td>{roadBlock.road}</td>
-                    <td>
-                      <div className="form-check form-switch">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id={`roadBlock-${index}`}
-                          checked={roadBlock.inUse}
-                          onChange={() => toggleInUse(index)}
-                        />
-                      </div>
-                    </td>
+    <div>
+      <style>{bootstrapStyle}</style>
+      <style>{appStyle}</style>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="table-responsive">
+              <table className="table table-bordered table-hover text-white">
+                <thead>
+                  <tr>
+                    <th>Road</th>
+                    <th>Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {roadBlocks.map((roadBlock, index) => (
+                    <tr
+                      key={index}
+                      className={
+                        roadBlock.inUse ? "table-danger" : "table-success"
+                      }
+                    >
+                      <td>{roadBlock.road}</td>
+                      <td>
+                        <div className="form-check form-switch">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id={`roadBlock-${index}`}
+                            checked={roadBlock.inUse}
+                            onChange={() => toggleInUse(index)}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
+          <button type="submit" onClick={refreshPage}>
+            Apply Changes
+          </button>
         </div>
-        <button type="submit" onClick={refreshPage}>
-          Apply Changes
-        </button>
       </div>
     </div>
   );
